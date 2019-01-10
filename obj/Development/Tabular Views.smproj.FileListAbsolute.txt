@@ -1,0 +1,6 @@
+C:\Users\8093aha\Documents\Statistikkdatabasen\Tabular Views\bin\Statistikkdatabase.asdatabase
+C:\Users\8093aha\Documents\Statistikkdatabasen\Tabular Views\bin\Statistikkdatabase.deploymenttargets
+C:\Users\8093aha\Documents\Statistikkdatabasen\Tabular Views\bin\Statistikkdatabase.deploymentoptions
+C:\Users\8093aha\Documents\Statistikkdatabasen\Tabular Views\obj\Development\Statistikkdatabase.asdatabase
+C:\Users\8093aha\Documents\Statistikkdatabasen\Tabular Views\obj\Development\Statistikkdatabase.deploymentoptions
+C:\Users\8093aha\Documents\Statistikkdatabasen\Tabular Views\obj\Development\Statistikkdatabase.deploymenttargets
