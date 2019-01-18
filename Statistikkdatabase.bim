@@ -2849,6 +2849,13 @@
             ],
             "formatString": "0.0",
             "displayFolder": "Samferdsel"
+          },
+          {
+            "name": "GitTest",
+            "expression": [
+              "",
+              "-1"
+            ]
           }
         ]
       },
