@@ -2854,7 +2854,13 @@
             "name": "GitTest",
             "expression": [
               "",
-              "-1"
+              "",
+              "var test =",
+              "1000",
+              "",
+              "Return (",
+              " test",
+              ")"
             ]
           }
         ]
