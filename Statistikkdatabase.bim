@@ -20,7 +20,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "laila.kleven@ks.no",
+          "Username": "martin.fjordholm@ks.no",
           "EncryptConnection": false
         }
       }
@@ -3117,6 +3117,35 @@
               "",
               "/* OBS hardkodede vekter - må lage en fil for dette */",
               "return (I2_5aar*0.78160)+(Iukont*0.10420)+(IndHoyUtd*0.11420)"
+            ]
+          },
+          {
+            "name": "TesterMF",
+            "expression": [
+              " ",
+              "",
+              "/*var vekttest2 = Calculate(sum('Alle Data'[Verdi]);*/",
+              "/*FIRSTNONBLANK(Variabel[Variabelnavn]; Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\"))*/",
+              "",
+              "/*return (vekttest2)*/",
+              "",
+              "VAR vekttest2 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\"),",
+              "filter(all('Kommune'[Kommunenummer]),'Kommune'[Kommunenummer] = \"EAK\")",
+              ")",
+              "",
+              "var vekt2 = ",
+              "CALCULATE(",
+              "  SUM('Alle Data'[Verdi]),",
+              "  FILTER(ALL(Variabel[Variabelnavn]),Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\")",
+              "",
+              "  /*FILTER(ALL('Funksjon Kostra'[Funksjonskode]); 'Funksjon Kostra'[Funksjonskode] IN {\"201\"; \"211\"; \"221\"});*/",
+              "  /*FILTER(ALL('Kommune'[Kommunenummer]);'Kommune'[Kommunenummer] = \"EAK\")*/",
+              ") ",
+              "",
+              "",
+              "RETURN vekt2",
+              ""
             ]
           }
         ]
