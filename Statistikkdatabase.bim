@@ -2517,10 +2517,13 @@
               "",
               "var a = CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"FUB\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Foreldreundersøkelsen: Total tilfredshet\")",
+              "/*filter(all('Variabel'[Variabelnavn]); 'Variabel'[Variabelnavn] = \"Foreldreundersøkelsen: Total tilfredshet\");*/",
+              "filter(all('Variabel'[Variabel]), 'Variabel'[Variabel]=\"KSbhfub746931020\")",
               ")",
               "",
-              "return a"
+              "return a",
+              "",
+              "/*17012019 Laila Her det brukt Variabel kode siden navn på variabel endres - skal hete kun Tilfredshet, dette sammenfaller med nye data fra Udir som lastes opp*/"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -2848,6 +2851,26 @@
               "return a"
             ],
             "formatString": "0.0",
+            "displayFolder": "Samferdsel"
+          },
+          {
+            "name": "Veidekker, kroner per meter vei)",
+            "expression": [
+              "",
+              "",
+              "var brutto = CALCULATE(SUM('Alle Data'[Verdi]),   ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"SFMT\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Brutto driftsutg eks avskrivninger til veidekker\")",
+              ")   ",
+              "",
+              "var lengde = CALCULATE(SUM('Alle Data'[Verdi]),   ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11814\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]),Variabel[Variabelnavn] = \"Lengde kommunalvei (km)\")   ",
+              ")  ",
+              "",
+              "Return ( brutto/(lengde*1000))"
+            ],
+            "formatString": "#,0.0",
             "displayFolder": "Samferdsel"
           }
         ]
