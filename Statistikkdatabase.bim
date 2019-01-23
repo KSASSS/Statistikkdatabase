@@ -20,7 +20,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "martin.fjordholm@ks.no",
+          "Username": "laila.kleven@ks.no",
           "EncryptConnection": false
         }
       }
@@ -2517,7 +2517,7 @@
               "",
               "var a = CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"FUB\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Foreldreundersøkelsen: Total tilfredshet\")",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Foreldreundersøkelsen: Tilfredshet\")",
               ")",
               "",
               "return a"
