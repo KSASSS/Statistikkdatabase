@@ -3330,7 +3330,8 @@
               "",
               "return ((divide(l5059,alle))*100)"
             ],
-            "formatString": "0.0"
+            "formatString": "0.0",
+            "displayFolder": "Grunnskole"
           },
           {
             "name": "Lærere i grunnskolen 60 år og eldre (prosent)",
@@ -3351,7 +3352,8 @@
               "",
               "return ((divide(l60,alle))*100)"
             ],
-            "formatString": "0.0"
+            "formatString": "0.0",
+            "displayFolder": "Grunnskole"
           },
           {
             "name": "Gjennomsnittlig antall elever per kommunale skole",
@@ -3394,7 +3396,8 @@
               "",
               "return ((divide(spes,elev))*100)"
             ],
-            "formatString": "0.0"
+            "formatString": "0.0",
+            "displayFolder": "Grunnskole"
           },
           {
             "name": "Elever i kommunale og private grunnskoler med spesialundervisning, 5.-7. trinn (prosent)",
@@ -3415,7 +3418,8 @@
               "",
               "return ((divide(spes,elev))*100)"
             ],
-            "formatString": "0.0"
+            "formatString": "0.0",
+            "displayFolder": "Grunnskole"
           },
           {
             "name": "Elever i kommunale og private grunnskoler med spesialundervisning, 8.-10. trinn (prosent)",
@@ -3436,7 +3440,8 @@
               "",
               "return ((divide(spes,elev))*100)"
             ],
-            "formatString": "0.0"
+            "formatString": "0.0",
+            "displayFolder": "Grunnskole"
           }
         ]
       },
