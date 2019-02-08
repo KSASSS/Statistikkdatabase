@@ -1061,58 +1061,6 @@
         ]
       },
       {
-        "name": "Grønt Hefte",
-        "isHidden": true,
-        "columns": [
-          {
-            "name": "Kommunenummer",
-            "dataType": "string",
-            "sourceColumn": "Kommunenummer"
-          },
-          {
-            "name": "År",
-            "dataType": "string",
-            "sourceColumn": "År"
-          },
-          {
-            "name": "Funksjonskode",
-            "dataType": "string",
-            "sourceColumn": "Funksjonskode"
-          },
-          {
-            "name": "Artsgruppekode",
-            "dataType": "string",
-            "sourceColumn": "Artsgruppekode"
-          },
-          {
-            "name": "Variabel",
-            "dataType": "string",
-            "sourceColumn": "Variabel"
-          },
-          {
-            "name": "Verdi",
-            "dataType": "string",
-            "sourceColumn": "Verdi"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/SQL2018\\TAB;Reporting\",",
-                "    #\"dbo_Grønt Hefte\" = Source{[Schema=\"dbo\",Item=\"Grønt Hefte\"]}[Data]",
-                "in",
-                "    #\"dbo_Grønt Hefte\""
-              ]
-            }
-          }
-        ]
-      },
-      {
         "name": "Nøkkeltall tjenester",
         "columns": [
           {
