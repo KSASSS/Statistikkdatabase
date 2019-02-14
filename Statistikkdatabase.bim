@@ -3837,6 +3837,21 @@
             ],
             "formatString": "#,0.0",
             "displayFolder": "Barnevern"
+          },
+          {
+            "name": "Antall barn med undersøkelse eller tiltak per årsverk (funksjon 244)*",
+            "expression": [
+              "",
+              "",
+              "var barn = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12280\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn med undersøking eller tiltak per årsverk (funksjon 244) (antall)\")",
+              ")",
+              "",
+              "return barn"
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Barnevern"
           }
         ]
       },
