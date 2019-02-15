@@ -1212,7 +1212,8 @@
               "var nettoeien = CALCULATE(sum('Alle Data'[Verdi]),",
               "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12367\"),",
               "filter(all('Artsgruppe Kostra'[Artsgruppekode]), 'Artsgruppe Kostra'[Artsgruppekode]=\"AGD2\"),",
-              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"121\", \"130\", \"190\", \"221\", \"222\", \"261\", \"381\", \"386\"}),",
+              "/*filter(all('Funksjon Kostra'[Funksjonskode]); 'Funksjon Kostra'[Funksjonskode] in {\"121\"; \"130\"; /*\"190\";*/ \"221\"; \"222\"; \"261\"; \"381\"; \"386\"});*/",
+              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] = \"FGK6a\"),",
               "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
               ")",
               "",
@@ -2237,31 +2238,6 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Korrigerte brutto driftsutgifter til kommunal eiendomsforvaltning per kvadratmeter (kroner)",
-            "expression": [
-              "",
-              "",
-              "var korrbreien = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12045\"),",
-              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD3\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
-              ")",
-              "",
-              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
-              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Areal totalt\")",
-              ")",
-              "",
-              "return (korrbreien*1000)/areal",
-              "",
-              "/*Beregning må kvalitetssikres, tallene er sjekket mot data fra ASSS 2018*/"
-            ],
-            "formatString": "#,0",
-            "displayFolder": "Eiendomsforvaltning"
-          },
-          {
             "name": "Andel barn i kommunale barnehager av alle barn i barnehage (prosent)",
             "expression": [
               "",
@@ -2811,15 +2787,17 @@
               "",
               ")",
               "var innb = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Innbyggertall per 1. juli\"),",
+              "FILTER(all('Tabeller'[Tabellnummer]), 'Tabeller'[Tabellnummer]=\"GHFK\"),",
+              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Innbyggertall per 1. juli (Kilde: Grønt Hefte)\"),",
               "FILTER(ALL(Kommune[Kommunenummer]), 'Kommune'[Kommunenummer]=\"EAK\")",
               "",
               ")",
-              "return ((nettobhg-avsbhg)/innb)*1000",
+              "return divide((nettobhg-avsbhg),innb)*1000",
               "",
               "",
               ""
             ],
+            "formatString": "#,0",
             "displayFolder": "Økonomi"
           },
           {
@@ -2828,16 +2806,15 @@
               "",
               "",
               "var I2_5aar = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Indeks innb. 2-5 år\")",
+              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Indeks innb. 2-5 år (Kilde: Grønt Hefte)\")",
               ")",
               "",
-              "",
               "var Iukont = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Indeks barn 1 år utan kontant-støtte\")",
+              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Indeks barn 1 år utan kontant-støtte (Kilde: Grønt Hefte)\")",
               ")",
               "",
               "var IndHoyUtd  = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Indeks innb. m. høgare ut-danning\")",
+              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] =\"Indeks innb. m. høgare ut-danning (Kilde: Grønt Hefte)\")",
               ")",
               "",
               "var vekt2_5 = CALCULATE(SUM('Alle Data'[Verdi]),",
@@ -2863,6 +2840,7 @@
               "",
               "/* Må sjekke om alle filtrene trengs*/"
             ],
+            "formatString": "0.00",
             "displayFolder": "Økonomi"
           },
           {
@@ -2954,6 +2932,7 @@
               "",
               ""
             ],
+            "formatString": "#,0",
             "displayFolder": "Økonomi"
           },
           {
@@ -2965,7 +2944,7 @@
               "[Brutto driftsutgifter ekskludert avskrivninger barnehage])",
               ""
             ],
-            "formatString": "0.00",
+            "formatString": "0.0000",
             "displayFolder": "Økonomi"
           },
           {
@@ -3003,7 +2982,7 @@
               ",",
               "[Brutto driftsutgifter ekskludert avskrivninger barnehage])"
             ],
-            "formatString": "0.00",
+            "formatString": "0.0000",
             "displayFolder": "Økonomi"
           },
           {
@@ -3053,7 +3032,7 @@
               ")",
               "return ((lonn-pensjon-arb)/(bruttobhg-avsbhg))"
             ],
-            "formatString": "0.00",
+            "formatString": "0.0000",
             "displayFolder": "Økonomi"
           },
           {
@@ -3064,6 +3043,7 @@
               "*",
               "[Lønnsandel 1 barnehage hele landet]"
             ],
+            "formatString": "#,0",
             "displayFolder": "Økonomi"
           },
           {
@@ -3080,7 +3060,7 @@
               ")",
               "return divide(pensjon,[Lønnsutgifter eksklusiv sosiale utgifter barnehage])"
             ],
-            "formatString": "#,0.00",
+            "formatString": "#,0.0000",
             "displayFolder": "Økonomi"
           },
           {
@@ -3098,7 +3078,7 @@
               ")",
               "return divide(arb,[Lønnsutgifter eksklusiv arbeidsgiveravgift barnehage])"
             ],
-            "formatString": "#,0.00",
+            "formatString": "#,0.0000",
             "displayFolder": "Økonomi"
           },
           {
@@ -3118,12 +3098,13 @@
               "",
               "var innb = CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"GHFK\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Innbyggertall per 1. juli\")",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Innbyggertall per 1. juli (Kilde: Grønt Hefte)\")",
               ")",
               "",
               "return innb",
               ""
             ],
+            "formatString": "0",
             "displayFolder": "Økonomi"
           },
           {
@@ -3853,6 +3834,182 @@
             ],
             "formatString": "#,0.0",
             "displayFolder": "Barnevern"
+          },
+          {
+            "name": "Korrigerte brutto driftsutgifter til kommunal eiendomsforvaltning per kvadratmeter (kroner)",
+            "expression": [
+              "",
+              "",
+              "var korrbreien = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12367\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD4\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Areal totalt\")",
+              ")",
+              "",
+              "return ((korrbreien*1000)/areal)",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Brutto driftsutgifter eksklusiv avskrivninger per kvadratmeter eiet bygg (kroner)",
+            "expression": [
+              "",
+              "",
+              "var brutto = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD10\"),",
+              "/*filter(all('Alle Data'[Artsgruppekode]); 'Alle Data'[Artsgruppekode]=\"AGD4\");*/",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var avskr = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"A590\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var leie = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"A190\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
+              ")",
+              "",
+              "return ((brutto-(leie+avskr))/areal)*1000",
+              "",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Utgifter til renholdsaktiviteter i kommunal eiendomsforvaltning, per kvadratmeter (kroner)",
+            "expression": [
+              "",
+              "",
+              "var renhold = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12047\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD38\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
+              ")",
+              "",
+              "return ((renhold*1000)/areal)",
+              "",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Korrigert brutto driftsutgifter til kommunal forvaltning av eiendommer per kvadratmeter (kroner)",
+            "expression": [
+              "",
+              "",
+              "var korrbreien = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12367\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD4\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"121\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Areal totalt\")",
+              ")",
+              "",
+              "return ((korrbreien*1000)/areal)",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Utgifter til driftsaktiviteter i kommunal eiendomsforvaltning, per kvadratmeter (kroner)",
+            "expression": [
+              "",
+              "",
+              "var drift = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12047\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD39\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
+              ")",
+              "",
+              "return ((drift*1000)/areal)",
+              "",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Utgifter til vedlikeholdsaktiviteter i kommunal eiendomsforvaltning, per kvadratmeter (kroner)",
+            "expression": [
+              "",
+              "",
+              "var ved = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12047\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD36\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
+              ")",
+              "",
+              "return ((ved*1000)/areal)",
+              "",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Sykefravær eiendomsforvaltning (PAI) (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"ASSS\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Sykefravær Eiendomsforvaltning i Alt (PAI)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Eiendomsforvaltning"
           }
         ]
       },
