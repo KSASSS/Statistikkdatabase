@@ -114,65 +114,6 @@
               ]
             }
           }
-        ],
-        "measures": [
-          {
-            "name": "Avskrivninger",
-            "expression": " CALCULATE(Sum('Alle Data'[Verdi]),'Artsgruppe Kostra'[Artsgruppekode] = \"07\") ",
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "Netto driftsutgifter",
-            "expression": " CALCULATE(Sum('Alle Data'[Verdi]),'Artsgruppe Kostra'[Artsgruppekode] = \"17\") ",
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "Netto driftsutgifter eksklusiv avskrivninger",
-            "expression": " CALCULATE(Sum('Alle Data'[Verdi]),'Artsgruppe Kostra'[Artsgruppekode] = \"17\") - CALCULATE(Sum('Alle Data'[Verdi]),'Artsgruppe Kostra'[Artsgruppekode] = \"07\") ",
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "Lønnsutgifter Ekskl. Sosiale kostnader",
-            "expression": [
-              " CALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"02\")  - ",
-              "\tCALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"21\") -  ",
-              "  \tCALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"25\") ",
-              "\t-- 21 = Arbeidsgiveravgift, 25 = pensjonsinnskudd og trekkpliktige forsikringsordninger"
-            ],
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "Lønnsutgifter Ekskl. Arbeidsgiveravgift",
-            "expression": [
-              " CALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"02\")  - ",
-              "\tCALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"21\") ",
-              "\t-- 21 = Arbeidsgiveravgift"
-            ],
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "Brutto driftsutgifter eksklusiv avskrivninger",
-            "expression": [
-              "  CALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"01\") -  ",
-              "\tCALCULATE(SUM('Alle Data'[Verdi]), 'Alle Data'[Artsgruppekode] = \"07\")"
-            ],
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "Lønnsutgifter",
-            "expression": " CALCULATE(Sum('Alle Data'[Verdi]),'Artsgruppe Kostra'[Artsgruppekode] = \"02\") ",
-            "displayFolder": "Nøkkeltall"
-          },
-          {
-            "name": "nettotest",
-            "expression": [
-              "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "  FILTER(ALL('Artsgruppe Kostra'[Artsgruppekode]), 'Artsgruppe Kostra'[Artsgruppekode]=\"17\")",
-              ")"
-            ],
-            "isHidden": true
-          }
         ]
       },
       {
@@ -1507,7 +1448,8 @@
               "",
               "CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode]=\"2\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Barn med barnevernstiltak i løpet av året  (antall) 0-22 år\"))"
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn] = ",
+              "\"Barn med barnevernstiltak i løpet av året  (antall) 0-22 år\"))"
             ],
             "formatString": "#,0",
             "isHidden": true
@@ -1518,10 +1460,12 @@
               "",
               "",
               "var barn017 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(ALL('Alle Data'[Tabell]),'Alle Data'[Tabell]=\"11805\"),",
               "filter(all(Variabel[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Personer (antall) 0-17 år\")",
               ")",
               "",
-              "return ('Nøkkeltall tjenester'[Barn med barnevernstiltak i løpet av året 0-22 år som er plassert f252 (antall)]/barn017)*100"
+              "return (DIVIDE('Nøkkeltall tjenester'",
+              "[Barn med barnevernstiltak i løpet av året 0-22 år som er plassert f252 (antall)],barn017))*100"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnevern"
@@ -1532,7 +1476,8 @@
               "",
               "CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode]=\"1\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Barn med barnevernstiltak i løpet av året  (antall) 0-22 år\"))"
+              "FILTER(ALL(Variabel[Variabelnavn]), ",
+              "Variabel[Variabelnavn] = \"Barn med barnevernstiltak i løpet av året  (antall) 0-22 år\"))"
             ],
             "formatString": "#,0",
             "isHidden": true
@@ -1543,10 +1488,12 @@
               "",
               "",
               "var tiltak022 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all(Variabel[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn med barnevernstiltak i løpet av året (antall) 0-22 år Tiltak i alt\")",
+              "filter(all(Variabel[Variabelnavn]), ",
+              "'Variabel'[Variabelnavn] = \"Barn med barnevernstiltak i løpet av året (antall) 0-22 år Tiltak i alt\")",
               ")",
               "",
-              "return ('Nøkkeltall tjenester'[Barn med barnevernstiltak i løpet av året 0-22 år som ikke er plassert f251 (antall)]/tiltak022)*100"
+              "return (DIVIDE('Nøkkeltall tjenester'",
+              "[Barn med barnevernstiltak i løpet av året 0-22 år som ikke er plassert f251 (antall)],tiltak022))*100"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnevern"
@@ -2139,7 +2086,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel barn 1-2 år i barnehage i forhold til innbyggere 1-2 år (prosent)",
+            "name": "Barn 1-2 år i barnehage av innbyggere 1-2 år (prosent)",
             "expression": [
               "",
               "",
@@ -2159,7 +2106,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel barn 3-5 år i barnehage i forhold til innbyggere 3-5 år (prosent)",
+            "name": "Barn 3-5 år i barnehage av innbyggere 3-5 år (prosent)",
             "expression": [
               "",
               "",
@@ -2179,7 +2126,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel minoritetsspråklige barn i barnehage i forhold til barnehagebarn 1-5 år (prosent)",
+            "name": "Minoritetsspråklige barn i barnehage av alle barnehagebarn 1-5 år (prosent)",
             "expression": [
               "",
               "Divide(CALCULATE(Sum('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Minoritetsspråklige barn (antall)\"),(",
@@ -2189,7 +2136,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel barn 1-5 år i barnehage i forhold til innbyggere 1-5 år (prosent)",
+            "name": "Barn 1-5 år i barnehage av innbyggere 1-5 år (prosent)",
             "expression": [
               "",
               "divide(CALCULATE(sum('Alle Data'[Verdi]), 'Variabel'[Variabelnavn]=\"Barn i barnehage 1-5 år\"),",
@@ -2238,7 +2185,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel barn i kommunale barnehager av alle barn i barnehage (prosent)",
+            "name": "Barn i kommunale barnehager av alle barn i barnehage (prosent)",
             "expression": [
               "",
               "",
@@ -2259,7 +2206,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel barn ekskl. minoritetsspråklige med ekstra ressurser av alle barn i kom. barnehager (prosent)*",
+            "name": "Barn ekskl. minoritetsspråklige med ekstra ressurser av alle barn i kom. barnehager (prosent)*",
             "expression": [
               "",
               "",
@@ -2274,9 +2221,8 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel barn i private barnehager av alle barn i barnehage (prosent)",
+            "name": "Barn i private barnehager av alle barn i barnehage (prosent)",
             "expression": [
-              "",
               "",
               "",
               "var barnkom = CALCULATE(sum('Alle Data'[Verdi]),",
@@ -2346,7 +2292,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Andel ansatte med barnehagelærerutdanning/annen pedagogisk utdanning av alle ansatte (prosent)",
+            "name": "Ansatte med barnehagelærerutdanning/annen pedagogisk utdanning av alle ansatte (prosent)",
             "expression": [
               "",
               "",
@@ -3068,7 +3014,6 @@
             "expression": [
               "",
               "",
-              "",
               "var arb =",
               "CALCULATE(sum('Alle Data'[Verdi]),",
               "FILTER(all('Tabeller'[Tabellnummer]), 'Tabeller'[Tabellnummer]=\"12367\"),",
@@ -3082,13 +3027,14 @@
             "displayFolder": "Økonomi"
           },
           {
-            "name": "Innbyggertall pensjon barnehage",
+            "name": "Test Innbyggertall pensjon barnehage",
             "expression": [
               "If(Calculate(Sum('Alle Data'[Verdi]), ",
               "'Variabel'[Variabelnavn] = \"Beløp (1000 kr)\", ",
               "'Artsgruppe Kostra'[Artsgruppekode]=\"AG16\",'Alle Data'[Funksjonskode] IN {\"201\", \"211\", \"221\"}) < 100, 0,[Innbyggere 1. juli])"
             ],
             "formatString": "#,0",
+            "isHidden": true,
             "displayFolder": "Økonomi"
           },
           {
@@ -3105,18 +3051,6 @@
               ""
             ],
             "formatString": "0",
-            "displayFolder": "Økonomi"
-          },
-          {
-            "name": "1Innbyggere i kommuner med kommunale barnehager",
-            "expression": [
-              " ",
-              "sumx(filter('Kommune', Kommune[Kostrakategori]=\"Kommune\"), ",
-              "'Nøkkeltall tjenester'[Innbyggertall pensjon barnehage]",
-              ")"
-            ],
-            "formatString": "0",
-            "isHidden": true,
             "displayFolder": "Økonomi"
           },
           {
@@ -3340,30 +3274,6 @@
             "displayFolder": "Grunnskole"
           },
           {
-            "name": "Tester1234",
-            "expression": [
-              "",
-              "",
-              "var a =",
-              "CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(ALL('Nøkkeltall tjenester'), 'Nøkkeltall tjenester'[Innbyggertall pensjon barnehage])",
-              ")",
-              "return a"
-            ],
-            "isHidden": true,
-            "displayFolder": "Økonomi"
-          },
-          {
-            "name": "Copy of 1Innbyggere i kommuner med kommunale barnehager",
-            "expression": [
-              " ",
-              "SUMX('Nøkkeltall tjenester', [Innbyggertall pensjon barnehage])",
-              ""
-            ],
-            "formatString": "0",
-            "isHidden": true
-          },
-          {
             "name": "Superformel1",
             "expression": [
               "",
@@ -3437,7 +3347,8 @@
               "return SUMX(eak_tabell, [Verdi])",
               ""
             ],
-            "isHidden": true
+            "isHidden": true,
+            "displayFolder": "Økonomi"
           },
           {
             "name": "Andel sosialhjelpsmottakere som forsørger barn under 18 år (prosent)",
@@ -3722,7 +3633,8 @@
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Beløp (1000 kr)\")",
               " )",
               "",
-              "return (brbv*1000)/'Nøkkeltall tjenester'[Barn med barnevernstiltak i løpet av året 0-22 år som er plassert f252 (antall)]"
+              "return (brbv*1000)/",
+              "'Nøkkeltall tjenester'[Barn med barnevernstiltak i løpet av året 0-22 år som er plassert f252 (antall)]"
             ],
             "formatString": "#,0",
             "displayFolder": "Barnevern"
@@ -4010,6 +3922,89 @@
             ],
             "formatString": "0.0",
             "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Innbyggertall pensjon barnehage",
+            "expression": [
+              "If(Calculate(Sum('Alle Data'[Verdi]), ",
+              "'Variabel'[Variabelnavn] = \"Beløp (1000 kr)\", ",
+              "'Kommune'[Kostrakategori] =\"Kommune\",",
+              "'Artsgruppe Kostra'[Artsgruppekode]=\"AG16\",'Alle Data'[Funksjonskode] IN {\"201\", \"211\", \"221\"}) < 100, 0,[Innbyggere 1. juli])"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Økonomi"
+          },
+          {
+            "name": "testc",
+            "expression": [
+              "CALCULATE(sumx('Nøkkeltall tjenester',[Innbyggere 1. juli]),",
+              "FILTER('Nøkkeltall tjenester',[Innbyggertall pensjon barnehage]<> BLANK()))"
+            ],
+            "formatString": "#,0",
+            "isHidden": true,
+            "displayFolder": "Økonomi"
+          },
+          {
+            "name": "testf",
+            "expression": [
+              " CALCULATE(SUMX('Nøkkeltall tjenester',[Innbyggertall pensjon barnehage]),",
+              "ALLSELECTED('Kommune'[Kommunenummer]))"
+            ],
+            "isHidden": true,
+            "displayFolder": "Økonomi"
+          },
+          {
+            "name": "Copy of testf",
+            "expression": [
+              " CALCULATE(SUMX('Nøkkeltall tjenester',[Innbyggertall pensjon barnehage]),",
+              "ALLSELECTED())"
+            ],
+            "isHidden": true
+          },
+          {
+            "name": "Stillinger med fagutdanning av alle fag- og tiltaksstillinger (prosent)",
+            "expression": [
+              "",
+              "",
+              "var fag = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12305\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Stillingar med fagutdanning (årsverk)\")",
+              ")",
+              "",
+              "var stillinger= CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(ALL('Alle Data'[Tabell]),'Alle Data'[Tabell]=\"12305\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = ",
+              "\"Stillingar knytt til sakshandsaming og tiltak frå barnevernstenesta (funksjon 244 unnateke støttefunksjonar, funksjon 251 og 252)  (årsverk)\")",
+              ")",
+              "",
+              "return (divide(fag,stillinger)*100)",
+              ""
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Barnevern"
+          },
+          {
+            "name": "Andel meldinger som går til undersøkelser (prosent)",
+            "expression": [
+              "",
+              "",
+              "var und = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12189\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = ",
+              "\"Meldingar til barnevernet (antall) Til undersøkelse Meldinger i alt\")",
+              ")",
+              "",
+              "var meld= CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(ALL('Alle Data'[Tabell]),'Alle Data'[Tabell]=\"12189\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = ",
+              "\"Meldingar til barnevernet (antall) Meldinger i alt Meldinger i alt\")",
+              ")",
+              "",
+              "return (divide(und,meld)*100)",
+              ""
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Barnevern"
           }
         ]
       },
@@ -4219,7 +4214,8 @@
               "",
               "",
               "return (nettobhg)"
-            ]
+            ],
+            "displayFolder": "Utregninger"
           },
           {
             "name": "Innbyggere 1.7.",
@@ -4232,7 +4228,8 @@
               "return (innb)",
               "",
               ""
-            ]
+            ],
+            "displayFolder": "Utregninger"
           },
           {
             "name": "Netto drift eks avskrivning pr innb",
@@ -4240,7 +4237,8 @@
               "",
               "",
               "([1 Netto driftsutgifter barnehage (kroner)]-[Avskrivninger barnehage (kroner)])/[Innbyggere 1.7.]*1000"
-            ]
+            ],
+            "displayFolder": "Utregninger"
           },
           {
             "name": "Avskrivninger barnehage (kroner)",
@@ -4256,7 +4254,8 @@
               "",
               "",
               "return (avsbhg)"
-            ]
+            ],
+            "displayFolder": "Utregninger"
           },
           {
             "name": "Beregnet UB",
@@ -4278,7 +4277,8 @@
               "",
               "/* OBS hardkodede vekter - må lage en fil for dette */",
               "return (I2_5aar*0.78160)+(Iukont*0.10420)+(IndHoyUtd*0.11420)"
-            ]
+            ],
+            "displayFolder": "Utregninger"
           },
           {
             "name": "TesterMF",
@@ -4308,7 +4308,8 @@
               "",
               "RETURN vekt2",
               ""
-            ]
+            ],
+            "displayFolder": "Utregninger"
           }
         ]
       }
