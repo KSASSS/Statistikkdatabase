@@ -1072,6 +1072,7 @@
           {
             "name": "Byggesak",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Byggesak"
           }
         ],
@@ -4127,28 +4128,232 @@
             "displayFolder": "Barnevern"
           },
           {
-            "name": "Samlet energibruk i kommunal eiendomsforvaltning kWh/m2",
+            "name": "Samlet energibruk i kommunal eiendomsforvaltning kWh/m2*",
             "expression": [
               "",
               "",
               "var energi = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12047\"),",
-              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD38\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
-              ")",
-              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
-              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12150\"),",
+              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] = \"FGK6\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Energibruk per m2 eid areal (kWh)\")",
               ")",
               "",
-              "return ((energi)/areal)",
+              "return ((energi)/3)",
               "",
               "",
+              "/*Denne utregningen må kryss-sjekkes*/",
+              "/*25.02.2019 Laila*/"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Godkjente boligenheter per 1 000 innbyggere",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"05940\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Fullførte boliger\") ",
+              ") ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11805\"), ",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Personer (antall) I alt\") ",
+              ")  ",
+              "",
+              "",
+              "return (var1/(var2/1000))",
               ""
             ],
-            "formatString": "#,0"
+            "formatString": "#,0.0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Godkjent annet areal per 1 000 innbyggere",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"05939\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Fullført bruksareal til annet enn bolig\") ",
+              ") ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11805\"), ",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Personer (antall) I alt\") ",
+              ")  ",
+              "",
+              "",
+              "return (var1/(var2/1000))",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Gjennomsnittlig saksbehandlingstid ett-trinnssøknader, 12-uker (dager)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12295\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Gjennomsnittlig saksbehandlingstid for byggesaker med 12 ukers frist (dager)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Saksbehandlingsgebyr for oppføring av enebolig (kroner)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12303\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Byggesaksgebyr for oppføring av enebolig (kr)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Nye søknader per 1 000 innbyggere",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader mottatt av kommunen Søknader i alt\") ",
+              ") ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11805\"), ",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Personer (antall) I alt\") ",
+              ")  ",
+              "",
+              "",
+              "return (var1/(var2/1000))",
+              ""
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Tilsyn i % av nye byggesaker",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12224\"), ",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Byggesaker med tilsyn (antall)\") ",
+              ")  ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12224\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Behandlede byggesøknader i alt (antall)\") ",
+              ") ",
+              "",
+              "return (divide(var1,var2))*100",
+              ""
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Antall utførte tilsyn med ikke omsøkt byggevirksomhet*",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11879\"), ",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Tilsyn i ikke omsøkte byggesaker (antall)\") ",
+              ")  ",
+              "",
+              "return (var1)"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Andel mangelfulle søknader i prosent av vedtak",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Antall mangelfulle søknader hvor det ble bedt om tilleggsdokumentasjon Søknader i alt\") ",
+              ")  ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader kommunen behandlet ferdig (fattet vedtak om) Søknader i alt\") ",
+              ") ",
+              "",
+              "return (divide(var1,var2))*100",
+              ""
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Brutto driftsutgifter per ferdigbehandlet byggesak (f302, f304, f305) (kroner)",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11276\"),",
+              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"302\", \"304\", \"305\"}),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"2. Brutto driftsutgifter (BDU)\")",
+              ")",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader kommunen behandlet ferdig (fattet vedtak om) Søknader i alt\") ",
+              ") ",
+              "",
+              "return ((divide(var1,var2))*1000)"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Andel vedtak innenfor frist (prosent)",
+            "expression": [
+              "",
+              " ",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader med saksbehandlingstid over lovpålagt tid Søknader i alt\") ",
+              ") ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader mottatt av kommunen Søknader i alt\") ",
+              ")",
+              "",
+              "return (divide(var2-var1,var2))*100",
+              ""
+            ],
+            "formatString": "#,0.0",
+            "displayFolder": "Byggesak"
+          },
+          {
+            "name": "Totale gebyrinntekter bygge- og delesaksbehandling per f.g.vedtak (kroner)",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11214\"), ",
+              "FILTER(ALL('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode]=\"304\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Gebyrinntekter (1 000 kr)\") ",
+              ")  ",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader kommunen behandlet ferdig (fattet vedtak om) Søknader i alt\") ",
+              ") ",
+              "",
+              "return (divide(var1*1000,var2))"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
           }
         ]
       },
