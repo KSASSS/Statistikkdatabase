@@ -2803,7 +2803,7 @@
               "",
               "/* Må sjekke om alle filtrene trengs*/"
             ],
-            "formatString": "0.00",
+            "formatString": "#,0",
             "displayFolder": "Økonomi"
           },
           {
@@ -3044,17 +3044,6 @@
             "displayFolder": "Økonomi"
           },
           {
-            "name": "Test Innbyggertall pensjon barnehage",
-            "expression": [
-              "If(Calculate(Sum('Alle Data'[Verdi]), ",
-              "'Variabel'[Variabelnavn] = \"Beløp (1000 kr)\", ",
-              "'Artsgruppe Kostra'[Artsgruppekode]=\"AG16\",'Alle Data'[Funksjonskode] IN {\"201\", \"211\", \"221\"}) < 100, 0,[Innbyggere 1. juli])"
-            ],
-            "formatString": "#,0",
-            "isHidden": true,
-            "displayFolder": "Økonomi"
-          },
-          {
             "name": "Innbyggere 1. juli",
             "expression": [
               "",
@@ -3067,7 +3056,7 @@
               "return innb",
               ""
             ],
-            "formatString": "0",
+            "formatString": "#,0",
             "displayFolder": "Økonomi"
           },
           {
@@ -3941,7 +3930,7 @@
             "displayFolder": "Eiendomsforvaltning"
           },
           {
-            "name": "Innbyggertall pensjon barnehage",
+            "name": "Innbyggertall pensjon barnehage_ny",
             "expression": [
               "If(Calculate(Sum('Alle Data'[Verdi]), ",
               "'Variabel'[Variabelnavn] = \"Beløp (1000 kr)\", ",
@@ -3949,34 +3938,6 @@
               "'Artsgruppe Kostra'[Artsgruppekode]=\"AG16\",'Alle Data'[Funksjonskode] IN {\"201\", \"211\", \"221\"}) < 100, 0,[Innbyggere 1. juli])"
             ],
             "formatString": "#,0",
-            "displayFolder": "Økonomi"
-          },
-          {
-            "name": "testc",
-            "expression": [
-              "CALCULATE(sumx('Nøkkeltall tjenester',[Innbyggere 1. juli]),",
-              "FILTER('Nøkkeltall tjenester',[Innbyggertall pensjon barnehage]<> BLANK()))"
-            ],
-            "formatString": "#,0",
-            "isHidden": true,
-            "displayFolder": "Økonomi"
-          },
-          {
-            "name": "testf",
-            "expression": [
-              " CALCULATE(SUMX('Nøkkeltall tjenester',[Innbyggertall pensjon barnehage]),",
-              "ALLSELECTED())"
-            ],
-            "isHidden": true,
-            "displayFolder": "Økonomi"
-          },
-          {
-            "name": "Copy of testf",
-            "expression": [
-              " CALCULATE(SUMX('Nøkkeltall tjenester',[Innbyggertall pensjon barnehage]),",
-              "ALLSELECTED())"
-            ],
-            "isHidden": true,
             "displayFolder": "Økonomi"
           },
           {
@@ -4476,6 +4437,27 @@
             ],
             "formatString": "0.0",
             "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Copy of Innbyggertall pensjon barnehage",
+            "expression": [
+              "If(Calculate(Sum('Alle Data'[Verdi]), ",
+              "'Variabel'[Variabelnavn] = \"Beløp (1000 kr)\", ",
+              "'Kommune'[Kostrakategori] in {\"Kommune\", \"Landet\"},",
+              "'Artsgruppe Kostra'[Artsgruppekode]=\"AG16\",'Alle Data'[Funksjonskode] IN {\"201\", \"211\", \"221\"}) < 100, 0,[Innbyggere 1. juli])"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Økonomi"
+          },
+          {
+            "name": "Test1234",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Innbyggertall pensjon barnehage_ny], ALLSELECTED(Kommune))"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Økonomi"
           }
         ]
       },
