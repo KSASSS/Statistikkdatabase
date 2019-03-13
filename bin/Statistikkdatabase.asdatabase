@@ -2756,7 +2756,8 @@
               "FILTER(ALL(Kommune[Kommunenummer]), 'Kommune'[Kommunenummer]=\"EAK\")",
               "",
               ")",
-              "return divide((nettobhg-avsbhg),innb)*1000",
+              "/*return divide((nettobhg-avsbhg);innb)*1000*/",
+              "return innb",
               "",
               "",
               ""
