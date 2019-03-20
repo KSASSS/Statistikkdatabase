@@ -384,46 +384,6 @@
         ]
       },
       {
-        "name": "Økonomi",
-        "isHidden": true,
-        "columns": [
-          {
-            "name": "Generelle",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Generelle"
-          },
-          {
-            "name": "Barnehage",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Barnehage"
-          },
-          {
-            "name": "Barnevern",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Barnevern"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/SQL2018\\TAB;Reporting\",",
-                "    dbo_Økonomi = Source{[Schema=\"dbo\",Item=\"Økonomi\"]}[Data]",
-                "in",
-                "    dbo_Økonomi"
-              ]
-            }
-          }
-        ]
-      },
-      {
         "name": "Nøkkeltall tjenester",
         "columns": [
           {
@@ -3135,7 +3095,7 @@
               "",
               "",
               "var melding = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12271\"),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12615\"),",
               "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Barn med melding (antall)\")",
               ")",
               "",
@@ -3427,7 +3387,7 @@
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=",
               "\"Antall enslige mindreårige f252\")",
               ")",
-              "return (brem*1000)/antall"
+              "return divide(brem*1000,antall)"
             ],
             "formatString": "#,0",
             "displayFolder": "Barnevern"
@@ -3648,13 +3608,13 @@
             "displayFolder": "Byggesak"
           },
           {
-            "name": "Brutto driftsutgifter per ferdigbehandlet byggesak (f302, f304, f305) (kroner)",
+            "name": "Brutto driftsutgifter per ferdigbehandlet byggesak (f302) (kroner)",
             "expression": [
               "",
               "",
               "var var1 = CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12611\"),",
-              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"302\", \"304\", \"305\"}),",
+              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"302\"}),",
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"2. Brutto driftsutgifter (1000 kr)\")",
               ")",
               "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
@@ -4021,6 +3981,36 @@
             ],
             "formatString": "0.000",
             "displayFolder": "Pleie og omsorg"
+          },
+          {
+            "name": "Brutto investeringsutgifter til kommunale veier og gater per innbygger (kroner)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11816\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Brutto investeringsutgifter til kommunale veier og gater per innbygger (kr)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Samferdsel"
+          },
+          {
+            "name": "Sykefravær pleie og omsorg (PAI) (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"ASSS\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Sykefravær Pleie og omsorg (PAI)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Pleie og omsorg"
           }
         ]
       },
@@ -4326,78 +4316,6 @@
               ""
             ],
             "displayFolder": "Utregninger"
-          }
-        ]
-      },
-      {
-        "name": "CalculatedTable 1",
-        "isHidden": true,
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "Kommunenummer",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "Alle Data[Kommunenummer]"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "År",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "Alle Data[År]"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Verdi",
-            "dataType": "double",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Verdi]"
-          },
-          {
-            "type": "calculated",
-            "name": "Copy of Innbyggertall pensjon barnehage",
-            "dataType": "double",
-            "isDataTypeInferred": true,
-            "expression": [
-              "If(Calculate(Sum('Alle Data'[Verdi]), ",
-              "'Variabel'[Variabelnavn] = \"Beløp (1000 kr)\", ",
-              "'Kommune'[Kostrakategori] in {\"Kommune\"},",
-              "",
-              "'Artsgruppe Kostra'[Artsgruppekode]=\"AG16\"",
-              ",'Alle Data'[Funksjonskode] IN {\"201\", \"211\", \"221\"}) < 100, 0,[Innbyggere 1. juli])"
-            ]
-          },
-          {
-            "type": "calculated",
-            "name": "Calculated Column 1",
-            "dataType": "double",
-            "isDataTypeInferred": true,
-            "expression": "[Innbyggertall pensjon barnehage_ny]"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "CalculatedTable 1",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "SUMMARIZE(",
-                "    CALCULATETABLE(",
-                "        'Alle Data',",
-                "        'Variabel'[Variabelnavn] = \"Innbyggertall per 1. juli (Kilde: Grønt Hefte)\",",
-                "        'Alle Data'[Tabell] = \"GHFK\"",
-                "    ),",
-                "    [Kommunenummer],",
-                "    [År],",
-                "    \"Verdi\",",
-                "    [Innbyggere 1. juli])",
-                ""
-              ]
-            }
           }
         ]
       }
