@@ -803,7 +803,7 @@
               "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Personer (antall) 0-17 år\")",
               ")",
               "",
-              "return DIVIDE((ndrbv*1000),barn)"
+              "return (DIVIDE((ndrbv*1000),barn))"
             ],
             "formatString": "#,0",
             "displayFolder": "Barnevern"
@@ -851,8 +851,8 @@
               "filter(all(Variabel[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Personer (antall) 0-17 år\")",
               ")",
               "",
-              "return (DIVIDE('Nøkkeltall tjenester'",
-              "[Barn med barnevernstiltak i løpet av året 0-22 år som er plassert f252 (antall)],barn017))*100"
+              "return DIVIDE('Nøkkeltall tjenester'",
+              "[Barn med barnevernstiltak i løpet av året 0-22 år som er plassert f252 (antall)],barn017)*100"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnevern"
@@ -880,8 +880,8 @@
               "'Variabel'[Variabelnavn] = \"Barn med barnevernstiltak i løpet av året (antall) 0-22 år Tiltak i alt\")",
               ")",
               "",
-              "return (DIVIDE('Nøkkeltall tjenester'",
-              "[Barn med barnevernstiltak i løpet av året 0-22 år som ikke er plassert f251 (antall)],tiltak022))*100"
+              "return DIVIDE('Nøkkeltall tjenester'",
+              "[Barn med barnevernstiltak i løpet av året 0-22 år som ikke er plassert f251 (antall)],tiltak022)*100"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnevern"
@@ -898,7 +898,8 @@
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Beløp (1000 kr)\")",
               " )",
               "",
-              "return DIVIDE((brbv*1000),'Nøkkeltall tjenester'[Barn med barnevernstiltak i løpet av året 0-22 år som ikke er plassert f251 (antall)])"
+              "return DIVIDE((brbv*1000),'Nøkkeltall tjenester'",
+              "[Barn med barnevernstiltak i løpet av året 0-22 år som ikke er plassert f251 (antall)])"
             ],
             "formatString": "#,0",
             "displayFolder": "Barnevern"
@@ -1439,7 +1440,7 @@
               "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Personer (antall) 1-5 år\")",
               ")",
               "",
-              "return divide((nettobhg*1000),bef)"
+              "return (divide((nettobhg*1000),bef))"
             ],
             "formatString": "#,0",
             "displayFolder": "Barnehager"
@@ -1461,7 +1462,7 @@
               "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Netto driftsutgifter totalt Beløp (1000 kr)\")",
               ")",
               "",
-              "return divide(nettobhg,nettoalle)*100"
+              "return (divide(nettobhg,nettoalle)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1491,7 +1492,7 @@
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"11805\")",
               ")",
               "",
-              "return divide(barnbhg12,barn12)*100"
+              "return (divide(barnbhg12,barn12)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1511,7 +1512,7 @@
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"11805\")",
               ")",
               "",
-              "return divide(barnbhg35,barn35)*100"
+              "return (divide(barnbhg35,barn35)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1550,7 +1551,7 @@
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12216\"),",
               "filter(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Korrigerte oppholdstimer (timer) Kommune\")",
               ")",
-              "return divide((kbr201*1000),kopph)"
+              "return (divide((kbr201*1000),kopph))"
             ],
             "formatString": "0",
             "displayFolder": "Barnehager"
@@ -1570,7 +1571,7 @@
               "filter(ALL('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] in {\"Ansatte (antall) Alle eierforhold Mann Annen grunnbemanning\", \"Ansatte (antall) Alle eierforhold Mann Pedagogisk leder\", \"Ansatte (antall) Alle eierforhold Mann Styrer\"})",
               ")",
               "",
-              "return divide(menn,ansatte)*100"
+              "return (divide(menn,ansatte)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1591,7 +1592,7 @@
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12056\")",
               ")",
               "",
-              "return divide(barnkom,barnbhg)*100"
+              "return (divide(barnkom,barnbhg)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1626,7 +1627,7 @@
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12056\")",
               ")",
               "",
-              "return divide(barnkom,barnbhg)*100"
+              "return (divide(barnkom,barnbhg)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1641,7 +1642,7 @@
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn per ansatt i barnehagen (bemanningstetthet) Kommunal\")",
               ")",
               "",
-              "return divide(1,a)*100"
+              "return (divide(1,a)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1656,7 +1657,7 @@
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn per ansatt i barnehagen (bemanningstetthet) Privat\")",
               ")",
               "",
-              "return divide(1,a)*100"
+              "return (divide(1,a)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
@@ -1687,7 +1688,7 @@
               "\"Barn i barnehage (antall) 3-5 år Kommune Alle oppholdskategorier\"})",
               ")",
               "",
-              "return divide(bhg,((barn1*2)+(barn2)))",
+              "return (divide(bhg,((barn1*2)+(barn2))))",
               "",
               "",
               "/*Barn er korrigert ut fra endret vekt - dette er ikke korrigert hos SSB*/",
@@ -1712,7 +1713,7 @@
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] in {\"Ansatte (antall) Alle eierforhold Kvinne Alle stillingstyper\", \"Ansatte (antall) Alle eierforhold Mann Alle stillingstyper\"})",
               ")",
               "",
-              "return divide(utd,ansatte)*100"
+              "return (divide(utd,ansatte)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
