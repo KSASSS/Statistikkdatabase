@@ -4191,6 +4191,134 @@
             ],
             "formatString": "#,0",
             "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Andel adkomst- og GS-vei på og/eller over akseptabel standard - tilstandsgrad TG2 (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"SFMT\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Andel adkomst- og GS-veg over akseptabelt nivå > TG2\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Samferdsel"
+          },
+          {
+            "name": "Andel gate og samlevei på og/eller over akseptabel standard - tilstandsgrad TG1 (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"SFMT\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Andel gate og samleveg over akseptabelt nivå > TG1\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Samferdsel"
+          },
+          {
+            "name": "Kostnad per meter vei for å komme over akseptabel standard (kroner)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"SFMT\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Kostnad per meter veg for å komme over akseptabel standard\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Samferdsel"
+          },
+          {
+            "name": "Andel utviklingshemmede av befolkningen 16 år og eldre (TTU) (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"TTU01\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Andel utviklingshemmede av befolkningen 16 år og eldre (TTU) (prosent)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.00",
+            "displayFolder": "Pleie og omsorg"
+          },
+          {
+            "name": "Utgifter per utviklingshemmet (fratrukket refusjon ressurskrevende) (TTU) (kroner)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"TTU01\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Utgifter per utviklingshemmet (fratrukket refusjon ressurskrevende) (TTU) (kroner)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Pleie og omsorg"
+          },
+          {
+            "name": "Andel utviklingshemmede 18 år+ i bolig med fast tilknyttet personell hele døgnet (TTU) (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"TTU01\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Andel utviklingshemmede 18 år og eldre som bor i bolig med fast tilknyttet personell hele døgnet (TTU) (prosent)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Pleie og omsorg"
+          },
+          {
+            "name": "Utgifter bolig med fast personell hele døgnet (inkl. private/ideelle) per beboer (TTU) (kroner)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"TTU01\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Utgifter til bolig med fast tilknyttet personell hele døgnet (inkl. private/ideelle) per beboer (TTU) (kroner)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Pleie og omsorg"
+          },
+          {
+            "name": "Andel årsverk med fagutdanning (TTU) (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"TTU01\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] ",
+              "= \"Andel årsverk med fagutdanning (TTU) (prosent)\")",
+              ")",
+              "",
+              "return a"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pleie og omsorg"
           }
         ]
       },
