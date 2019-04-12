@@ -1088,7 +1088,7 @@
               ")",
               "",
               "",
-              "return divide((kapasitet-pasienter),bef)*100"
+              "return 100+(divide((kapasitet-pasienter),bef)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Kommunehelse"
@@ -4330,6 +4330,46 @@
             ],
             "formatString": "0",
             "displayFolder": "Pleie og omsorg"
+          },
+          {
+            "name": "Målt produksjon helsestasjon",
+            "expression": [
+              "",
+              "",
+              "var undGrav = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12191\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall nyinnskrevne gravide som har møtt til svangerskapskontroll (antall)\")",
+              ")",
+              "",
+              "var undFG = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Hjemmebesøk nyfødte\")",
+              ")",
+              "",
+              "var und8 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt 8. leveuke\")",
+              ")",
+              "",
+              "var und23 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt ved 2-års alder\")",
+              ")",
+              "",
+              "var und4 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt ved 4-års alder\")",
+              ")",
+              "",
+              "var arsverkhst05= CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"ÅRHOS\"),",
+              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Årsverk 0-5 totalt uten ledelse. Helsestasjon 0-5 år\")",
+              ")",
+              "",
+              "return DIVIDE((DIVIDE(((21*undGrav)+(31*undFG)+(16*und8)+(16*und23)+(16*und4)),100)),arsverkhst05)",
+              ""
+            ],
+            "displayFolder": "Kommunehelse"
           }
         ]
       },
