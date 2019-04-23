@@ -1064,7 +1064,7 @@
               "",
               "return divide(kapasitet,pasienter)*100"
             ],
-            "formatString": "#,0",
+            "formatString": "#,0.0",
             "displayFolder": "Kommunehelse"
           },
           {
@@ -1091,7 +1091,7 @@
               "return ",
               "    (divide((kapasitet-pasienter),bef)*100)"
             ],
-            "formatString": "0.0",
+            "formatString": "0.00",
             "displayFolder": "Kommunehelse"
           },
           {
