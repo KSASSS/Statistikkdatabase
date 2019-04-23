@@ -1088,7 +1088,8 @@
               ")",
               "",
               "",
-              "return 100+(divide((kapasitet-pasienter),bef)*100)"
+              "return ",
+              "    (divide((kapasitet-pasienter),bef)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Kommunehelse"
