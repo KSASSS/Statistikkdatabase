@@ -4378,6 +4378,20 @@
               ""
             ],
             "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Konsultasjon og sykebesøk per 1 000 innbyggere",
+            "expression": [
+              "",
+              "",
+              "var konsAlle = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"KPR01\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"2 konsultasjon Alle aldre Antall pasienter per 1 000 innbyggere\")",
+              ")",
+              "",
+              "return konsAlle"
+            ],
+            "displayFolder": "Kommunehelse"
           }
         ]
       },
