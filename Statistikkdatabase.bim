@@ -20,7 +20,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "laila.kleven@ks.no",
+          "Username": "martin.fjordholm@ks.no",
           "EncryptConnection": false
         }
       }
@@ -4392,6 +4392,20 @@
               "return konsAlle"
             ],
             "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Barn 1-5 år i barnehage (antall)",
+            "expression": [
+              "",
+              "",
+              "var b = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage 1-5 år\")",
+              ")",
+              "return b",
+              "",
+              ""
+            ],
+            "displayFolder": "Barnehager"
           }
         ]
       },
