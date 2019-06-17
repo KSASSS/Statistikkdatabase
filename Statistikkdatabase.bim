@@ -20,7 +20,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "laila.kleven@ks.no",
+          "Username": "martin.fjordholm@ks.no",
           "EncryptConnection": false
         }
       }
@@ -4378,6 +4378,34 @@
               ""
             ],
             "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Konsultasjon og sykebesøk per 1 000 innbyggere",
+            "expression": [
+              "",
+              "",
+              "var konsAlle = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"KPR01\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"2 konsultasjon Alle aldre Antall pasienter per 1 000 innbyggere\")",
+              ")",
+              "",
+              "return konsAlle"
+            ],
+            "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Barn 1-5 år i barnehage (antall)",
+            "expression": [
+              "",
+              "",
+              "var b = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage 1-5 år\")",
+              ")",
+              "return b",
+              "",
+              ""
+            ],
+            "displayFolder": "Barnehager"
           }
         ]
       },
