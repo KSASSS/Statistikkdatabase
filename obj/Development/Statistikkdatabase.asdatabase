@@ -4430,6 +4430,60 @@
               "",
               ""
             ]
+          },
+          {
+            "name": "Antall sosialhjelpsmottakere som forsørger barn under 18 år (prosent)",
+            "expression": [
+              "",
+              "",
+              "var langtid= CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12219\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Sosialhjelpsmottakere som forsørger barn under 18 år (antall)\") ",
+              ") ",
+              "  ",
+              "return (langtid)"
+            ]
+          },
+          {
+            "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år (prosent)",
+            "expression": [
+              "",
+              "",
+              "var sosmott = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12219\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Sosialhjelpsmottakere (antall)\")",
+              ")",
+              "",
+              "return sosmott"
+            ]
+          },
+          {
+            "name": "Sosialhjelpsmottakere med sosialhjelp som viktigste kilde til livsopphold (antall)",
+            "expression": [
+              "",
+              "",
+              "var sosv = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Sosialhjelpsmottakere med sosialhjelp som viktigste kilde til livsopphold (antall)\")",
+              ")",
+              "",
+              "return sosv",
+              ""
+            ]
+          },
+          {
+            "name": "Gjennomsnittlig stønadslengde med sosialhjelp som hovedinntekt (måneder)",
+            "expression": [
+              "",
+              "",
+              "var soslg = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Gjennomsnittlig stønadslengde for mottakere med sosialhjelp som hovedinntekt  (måneder)\")",
+              ")",
+              "",
+              "return soslg",
+              "",
+              "",
+              ""
+            ]
           }
         ]
       },
