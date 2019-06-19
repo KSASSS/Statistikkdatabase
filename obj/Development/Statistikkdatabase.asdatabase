@@ -21,7 +21,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "laila.kleven@ks.no",
+          "Username": "martin.fjordholm@ks.no",
           "EncryptConnection": false
         }
       }
@@ -1089,7 +1089,8 @@
               ")",
               "",
               "",
-              "return 100+(divide((kapasitet-pasienter),bef)*100)"
+              "return ",
+              "    (divide((kapasitet-pasienter),bef)*100)"
             ],
             "formatString": "0.0",
             "displayFolder": "Kommunehelse"
@@ -1479,66 +1480,6 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Barn 1-2 år i barnehage av innbyggere 1-2 år (prosent)",
-            "expression": [
-              "",
-              "",
-              "var barnbhg12 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 1-2 år Alle eierforhold Alle oppholdskategorier\")",
-              ")",
-              "",
-              "var barn12 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Personer (antall) 1-2 år\"),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"11805\")",
-              ")",
-              "",
-              "return (divide(barnbhg12,barn12)*100)"
-            ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
-          },
-          {
-            "name": "Barn 3-5 år i barnehage av innbyggere 3-5 år (prosent)",
-            "expression": [
-              "",
-              "",
-              "var barnbhg35 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 3-5 år Alle eierforhold Alle oppholdskategorier\")",
-              ")",
-              "",
-              "var barn35 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Personer (antall) 3-5 år\"),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"11805\")",
-              ")",
-              "",
-              "return (divide(barnbhg35,barn35)*100)"
-            ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
-          },
-          {
-            "name": "Minoritetsspråklige barn i barnehage av alle barnehagebarn 1-5 år (prosent)",
-            "expression": [
-              "",
-              "Divide(CALCULATE(Sum('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Minoritetsspråklige barn (antall)\"),(",
-              "CALCULATE(SUM('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Barn i barnehage 1-5 år\")))*100"
-            ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
-          },
-          {
-            "name": "Barn 1-5 år i barnehage av innbyggere 1-5 år (prosent)",
-            "expression": [
-              "",
-              "divide(CALCULATE(sum('Alle Data'[Verdi]), 'Variabel'[Variabelnavn]=\"Barn i barnehage 1-5 år\"),",
-              "(CALCULATE(sum('Alle Data'[Verdi]), Variabel[Variabelnavn]=\"Personer (antall) 1-5 år\")))*100"
-            ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
-          },
-          {
             "name": "Korrigerte brutto driftsutgifter f201 per korrigert oppholdstime i kommunale barnehage (kroner)",
             "expression": [
               "",
@@ -1578,60 +1519,28 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Barn i kommunale barnehager av alle barn i barnehage (prosent)",
+            "name": "Korrigerte brutto driftsutgifter til kommunal eiendomsforvaltning per kvadratmeter (kroner)",
             "expression": [
               "",
               "",
-              "",
-              "var barnkom = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 0-6 år Kommune Alle oppholdskategorier\")",
+              "var korrbreien = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12367\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD4\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
               ")",
               "",
-              "var barnbhg = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Barn i barnehage (antall) 0-6 år Alle eierforhold Alle oppholdskategorier\"),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12056\")",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Areal totalt\")",
               ")",
               "",
-              "return (divide(barnkom,barnbhg)*100)"
+              "return divide((korrbreien*1000),areal)",
+              ""
             ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
-          },
-          {
-            "name": "Barn ekskl. minoritetsspråklige med ekstra ressurser av alle barn i kom. barnehager (prosent)*",
-            "expression": [
-              "",
-              "",
-              "var barnekstra = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12562\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Andel barn, eksklusive minoritetsspråklige, som får ekstra ressurser, i forhold til alle barn i kommunale barnehager (prosent)\")",
-              ")",
-              "",
-              "return barnekstra"
-            ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
-          },
-          {
-            "name": "Barn i private barnehager av alle barn i barnehage (prosent)",
-            "expression": [
-              "",
-              "",
-              "var barnkom = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 0-6 år Privat Alle oppholdskategorier\")",
-              ")",
-              "",
-              "var barnbhg = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Barn i barnehage (antall) 0-6 år Alle eierforhold Alle oppholdskategorier\"),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12056\")",
-              ")",
-              "",
-              "return (divide(barnkom,barnbhg)*100)"
-            ],
-            "formatString": "0.0",
-            "displayFolder": "Barnehager"
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
           },
           {
             "name": "Grunnbemanning per barn kommunale barnehager (prosent)*",
@@ -1696,27 +1605,6 @@
               "/*27.3.2019 Laila */"
             ],
             "formatString": "0.00",
-            "displayFolder": "Barnehager"
-          },
-          {
-            "name": "Ansatte med barnehagelærerutdanning/annen pedagogisk utdanning av alle ansatte (prosent)",
-            "expression": [
-              "",
-              "",
-              "var utd = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"09345\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] in {\"Ansatte Pedagogisk utdanning som tilsvarer utdanningskravet til styrer/pedagogisk leder Kommune\", \"Ansatte Pedagogisk utdanning som tilsvarer utdanningskravet til styrer/pedagogisk leder Privat\",",
-              "\"Ansatte Pedagogisk utdanning som tilsvarer utdanningskravet til styrer/pedagogisk leder Fylkeskommune/stat\", \"Ansatte Barnehagelærer Fylkeskommune/stat\", \"Ansatte Barnehagelærer Kommune\", \"Ansatte Barnehagelærer Privat\"})",
-              ")",
-              "",
-              "var ansatte = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12129\"),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] in {\"Ansatte (antall) Alle eierforhold Kvinne Alle stillingstyper\", \"Ansatte (antall) Alle eierforhold Mann Alle stillingstyper\"})",
-              ")",
-              "",
-              "return (divide(utd,ansatte)*100)"
-            ],
-            "formatString": "0.0",
             "displayFolder": "Barnehager"
           },
           {
@@ -2670,6 +2558,143 @@
             "displayFolder": "Grunnskole"
           },
           {
+            "name": "Barn 1-2 år i barnehage av innbyggere 1-2 år (prosent)",
+            "expression": [
+              "",
+              "",
+              "var barnbhg12 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 1-2 år Alle eierforhold Alle oppholdskategorier\")",
+              ")",
+              "",
+              "var barn12 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Personer (antall) 1-2 år\"),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"11805\")",
+              ")",
+              "",
+              "return (divide(barnbhg12,barn12)*100)"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barn 3-5 år i barnehage av innbyggere 3-5 år (prosent)",
+            "expression": [
+              "",
+              "",
+              "var barnbhg35 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 3-5 år Alle eierforhold Alle oppholdskategorier\")",
+              ")",
+              "",
+              "var barn35 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Personer (antall) 3-5 år\"),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"11805\")",
+              ")",
+              "",
+              "return (divide(barnbhg35,barn35)*100)"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Minoritetsspråklige barn i barnehage av alle barnehagebarn 1-5 år (prosent)",
+            "expression": [
+              "",
+              "Divide(CALCULATE(Sum('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Minoritetsspråklige barn (antall)\"),(",
+              "CALCULATE(SUM('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Barn i barnehage 1-5 år\")))*100"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barn 1-5 år i barnehage av innbyggere 1-5 år (prosent)",
+            "expression": [
+              "",
+              "divide(CALCULATE(sum('Alle Data'[Verdi]), 'Variabel'[Variabelnavn]=\"Barn i barnehage 1-5 år\"),",
+              "(CALCULATE(sum('Alle Data'[Verdi]), Variabel[Variabelnavn]=\"Personer (antall) 1-5 år\")))*100"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barn i kommunale barnehager av alle barn i barnehage (prosent)",
+            "expression": [
+              "",
+              "",
+              "",
+              "var barnkom = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 0-6 år Kommune Alle oppholdskategorier\")",
+              ")",
+              "",
+              "var barnbhg = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Barn i barnehage (antall) 0-6 år Alle eierforhold Alle oppholdskategorier\"),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12056\")",
+              ")",
+              "",
+              "return (divide(barnkom,barnbhg)*100)"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barn ekskl. minoritetsspråklige med ekstra ressurser av alle barn i kom. barnehager (prosent)*",
+            "expression": [
+              "",
+              "",
+              "var barnekstra = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12562\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Andel barn, eksklusive minoritetsspråklige, som får ekstra ressurser, i forhold til alle barn i kommunale barnehager (prosent)\")",
+              ")",
+              "",
+              "return barnekstra"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barn i private barnehager av alle barn i barnehage (prosent)",
+            "expression": [
+              "",
+              "",
+              "var barnkom = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12056\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 0-6 år Privat Alle oppholdskategorier\")",
+              ")",
+              "",
+              "var barnbhg = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Barn i barnehage (antall) 0-6 år Alle eierforhold Alle oppholdskategorier\"),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12056\")",
+              ")",
+              "",
+              "return (divide(barnkom,barnbhg)*100)"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Ansatte med barnehagelærerutdanning/annen pedagogisk utdanning av alle ansatte (prosent)",
+            "expression": [
+              "",
+              "",
+              "var utd = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"09345\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] in {\"Ansatte Pedagogisk utdanning som tilsvarer utdanningskravet til styrer/pedagogisk leder Kommune\", \"Ansatte Pedagogisk utdanning som tilsvarer utdanningskravet til styrer/pedagogisk leder Privat\",",
+              "\"Ansatte Pedagogisk utdanning som tilsvarer utdanningskravet til styrer/pedagogisk leder Fylkeskommune/stat\", \"Ansatte Barnehagelærer Fylkeskommune/stat\", \"Ansatte Barnehagelærer Kommune\", \"Ansatte Barnehagelærer Privat\"})",
+              ")",
+              "",
+              "var ansatte = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12129\"),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] in {\"Ansatte (antall) Alle eierforhold Kvinne Alle stillingstyper\", \"Ansatte (antall) Alle eierforhold Mann Alle stillingstyper\"})",
+              ")",
+              "",
+              "return (divide(utd,ansatte)*100)"
+            ],
+            "formatString": "0.0",
+            "displayFolder": "Barnehager"
+          },
+          {
             "name": "Superformel1",
             "expression": [
               "",
@@ -3140,67 +3165,6 @@
             "displayFolder": "Barnevern"
           },
           {
-            "name": "Korrigerte brutto driftsutgifter til kommunal eiendomsforvaltning per kvadratmeter (kroner)",
-            "expression": [
-              "",
-              "",
-              "var korrbreien = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12367\"),",
-              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD4\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
-              ")",
-              "",
-              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
-              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Areal totalt\")",
-              ")",
-              "",
-              "return divide((korrbreien*1000),areal)",
-              ""
-            ],
-            "formatString": "#,0",
-            "displayFolder": "Eiendomsforvaltning"
-          },
-          {
-            "name": "Korrigerte brutto driftsutgifter eksklusiv avskrivninger per kvadratmeter eiet bygg (kroner)",
-            "expression": [
-              "",
-              "",
-              "var brutto = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
-              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD4\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
-              ")",
-              "var avskr = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
-              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"A590\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
-              ")",
-              "var leie = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
-              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"A190\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
-              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
-              ")",
-              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
-              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
-              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
-              ")",
-              "",
-              "return divide((brutto-(leie+avskr)),areal)*1000",
-              "",
-              "",
-              ""
-            ],
-            "formatString": "#,0",
-            "displayFolder": "Eiendomsforvaltning"
-          },
-          {
             "name": "Utgifter til renholdsaktiviteter i kommunal eiendomsforvaltning, per kvadratmeter (kroner)",
             "expression": [
               "",
@@ -3625,27 +3589,6 @@
             "displayFolder": "Byggesak"
           },
           {
-            "name": "Brutto driftsutgifter per ferdigbehandlet byggesak (f302) (kroner)",
-            "expression": [
-              "",
-              "",
-              "var var1 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12611\"),",
-              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"302\"}),",
-              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"2. Brutto driftsutgifter (1000 kr)\")",
-              ")",
-              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
-              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
-              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader kommunen behandlet ferdig (fattet vedtak om)\") ",
-              ") ",
-              "",
-              "return ((divide(var1,var2))*1000)",
-              ""
-            ],
-            "formatString": "#,0",
-            "displayFolder": "Byggesak"
-          },
-          {
             "name": "Andel vedtak innenfor frist (prosent)",
             "expression": [
               "",
@@ -3854,6 +3797,64 @@
             ],
             "formatString": "#,0",
             "displayFolder": "Økonomi"
+          },
+          {
+            "name": "Korrigerte brutto driftsutgifter eksklusiv avskrivninger per kvadratmeter eiet bygg (kroner)",
+            "expression": [
+              "",
+              "",
+              "var brutto = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"AGD4\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var avskr = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"A590\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var leie = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12559\"),",
+              "filter(all('Alle Data'[Artsgruppekode]), 'Alle Data'[Artsgruppekode]=\"A190\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6a\"),",
+              "FILTER(ALL(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "var areal = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11906\"),",
+              "filter(all('Alle Data'[Funksjonskode]), 'Alle Data'[Funksjonskode] = \"FGK6\"),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn]=\"Areal (m2) Eid areal\")",
+              ")",
+              "",
+              "return divide((brutto-(leie+avskr)),areal)*1000",
+              "",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Eiendomsforvaltning"
+          },
+          {
+            "name": "Brutto driftsutgifter per ferdigbehandlet byggesak (f302) (kroner)",
+            "expression": [
+              "",
+              "",
+              "var var1 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12611\"),",
+              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"302\"}),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"2. Brutto driftsutgifter (1000 kr)\")",
+              ")",
+              "var var2 = CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11211\"), ",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall søknader kommunen behandlet ferdig (fattet vedtak om)\") ",
+              ") ",
+              "",
+              "return ((divide(var1,var2))*1000)",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Byggesak"
           },
           {
             "name": "Test12345",
@@ -4338,39 +4339,75 @@
               "",
               "",
               "var undGrav = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12191\"),",
-              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall nyinnskrevne gravide som har møtt til svangerskapskontroll (antall)\")",
+              "    FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12191\"),",
+              "    filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Antall nyinnskrevne gravide som har møtt til svangerskapskontroll (antall)\")",
               ")",
               "",
               "var undFG = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
-              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Hjemmebesøk nyfødte\")",
+              "    FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "    FILTER(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Hjemmebesøk nyfødte\")",
               ")",
               "",
               "var und8 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
-              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt 8. leveuke\")",
+              "    FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "    FILTER(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt 8. leveuke\")",
               ")",
               "",
               "var und23 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
-              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt ved 2-års alder\")",
+              "    FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "    FILTER(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt ved 2-års alder\")",
               ")",
               "",
               "var und4 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
-              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt ved 4-års alder\")",
+              "    FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"11993\"),",
+              "    FILTER(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Barn (antall) Undersøkt ved 4-års alder\")",
               ")",
               "",
               "var arsverkhst05= CALCULATE(sum('Alle Data'[Verdi]),",
-              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"ÅRHOS\"),",
-              "FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Årsverk 0-5 totalt uten ledelse. Helsestasjon 0-5 år\")",
+              "    FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"ÅRHOS\"),",
+              "    FILTER(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Årsverk 0-5 totalt uten ledelse. Helsestasjon 0-5 år\")",
               ")",
               "",
-              "return DIVIDE((DIVIDE(((21*undGrav)+(31*undFG)+(16*und8)+(16*und23)+(16*und4)),100)),arsverkhst05)",
+              "var vekthstprod = (21*undGrav)+(31*undFG)+(16*und8)+(16*und23)+(16*und4)",
+              "",
+              "return (",
+              "    DIVIDE(",
+              "        DIVIDE(vekthstprod,100),",
+              "        arsverkhst05",
+              "    )",
+              ")",
               ""
             ],
             "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Konsultasjon og sykebesøk per 1 000 innbyggere",
+            "expression": [
+              "",
+              "",
+              "var konsAlle = CALCULATE(sum('Alle Data'[Verdi]),",
+              "FILTER(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"KPR01\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"2 konsultasjon Alle aldre Antall pasienter per 1 000 innbyggere\")",
+              ")",
+              "",
+              "return konsAlle"
+            ],
+            "displayFolder": "Kommunehelse"
+          },
+          {
+            "name": "Barn 1-5 år i barnehage (antall)",
+            "expression": [
+              "",
+              "",
+              "var b = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage 1-5 år\")",
+              ")",
+              "return b",
+              "",
+              ""
+            ],
+            "formatString": "0",
+            "displayFolder": "Barnehager"
           }
         ]
       },
@@ -4598,11 +4635,33 @@
             "displayFolder": "Utregninger"
           },
           {
-            "name": "Netto drift eks avskrivning pr innb",
+            "name": "TesterMF",
             "expression": [
+              " ",
+              "",
+              "/*var vekttest2 = Calculate(sum('Alle Data'[Verdi]);*/",
+              "/*FIRSTNONBLANK(Variabel[Variabelnavn]; Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\"))*/",
+              "",
+              "/*return (vekttest2)*/",
+              "",
+              "VAR vekttest2 = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\"),",
+              "filter(all('Kommune'[Kommunenummer]),'Kommune'[Kommunenummer] = \"EAK\")",
+              ")",
+              "",
+              "var vekt2 = ",
+              "CALCULATE(",
+              "  SUM('Alle Data'[Verdi]),",
+              "  FILTER(ALL(Variabel[Variabelnavn]),Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\")",
+              "",
+              "  /*FILTER(ALL('Funksjon Kostra'[Funksjonskode]); 'Funksjon Kostra'[Funksjonskode] IN {\"201\"; \"211\"; \"221\"});*/",
+              "  /*FILTER(ALL('Kommune'[Kommunenummer]);'Kommune'[Kommunenummer] = \"EAK\")*/",
+              ") ",
               "",
               "",
-              "([1 Netto driftsutgifter barnehage (kroner)]-[Avskrivninger barnehage (kroner)])/[Innbyggere 1.7.]*1000"
+              "",
+              "RETURN vekt2",
+              ""
             ],
             "displayFolder": "Utregninger"
           },
@@ -4647,33 +4706,11 @@
             "displayFolder": "Utregninger"
           },
           {
-            "name": "TesterMF",
+            "name": "Netto drift eks avskrivning pr innb",
             "expression": [
-              " ",
-              "",
-              "/*var vekttest2 = Calculate(sum('Alle Data'[Verdi]);*/",
-              "/*FIRSTNONBLANK(Variabel[Variabelnavn]; Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\"))*/",
-              "",
-              "/*return (vekttest2)*/",
-              "",
-              "VAR vekttest2 = CALCULATE(sum('Alle Data'[Verdi]),",
-              "filter(all(Variabel[Variabelnavn]), Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\"),",
-              "filter(all('Kommune'[Kommunenummer]),'Kommune'[Kommunenummer] = \"EAK\")",
-              ")",
-              "",
-              "var vekt2 = ",
-              "CALCULATE(",
-              "  SUM('Alle Data'[Verdi]),",
-              "  FILTER(ALL(Variabel[Variabelnavn]),Variabel[Variabelnavn] = \"Innb 2-5 år vektinger\")",
-              "",
-              "  /*FILTER(ALL('Funksjon Kostra'[Funksjonskode]); 'Funksjon Kostra'[Funksjonskode] IN {\"201\"; \"211\"; \"221\"});*/",
-              "  /*FILTER(ALL('Kommune'[Kommunenummer]);'Kommune'[Kommunenummer] = \"EAK\")*/",
-              ") ",
               "",
               "",
-              "",
-              "RETURN vekt2",
-              ""
+              "([1 Netto driftsutgifter barnehage (kroner)]-[Avskrivninger barnehage (kroner)])/[Innbyggere 1.7.]*1000"
             ],
             "displayFolder": "Utregninger"
           }
