@@ -4401,12 +4401,34 @@
               "var b = CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage 1-5 år\")",
               ")",
-              "return b",
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 0 år Alle eierforhold Alle oppholdskategorier\")",
+              ") ",
+              "",
+              "",
+              "return b + a ",
+              "",
               "",
               ""
             ],
             "formatString": "0",
             "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barnehagelærere i forhold til grunnbemanning (prosent)",
+            "expression": [
+              " ",
+              "",
+              "var bla = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Andel barnehagelærere i forhold til grunnbemanning (prosent)\")",
+              ")",
+              "",
+              "return bla",
+              "",
+              ""
+            ]
           }
         ]
       },
