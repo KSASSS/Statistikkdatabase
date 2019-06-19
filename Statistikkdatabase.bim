@@ -20,7 +20,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "martin.fjordholm@ks.no",
+          "Username": "Axel.Hjelmervik.Hansen@ks.no",
           "EncryptConnection": false
         }
       }
