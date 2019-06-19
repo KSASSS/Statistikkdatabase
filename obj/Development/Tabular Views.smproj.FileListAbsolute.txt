@@ -10,3 +10,9 @@ C:\Users\3349ltk\Documents\GitHub\Statistikkdatabase\bin\Statistikkdatabase.depl
 C:\Users\3349ltk\Documents\GitHub\Statistikkdatabase\obj\Development\Statistikkdatabase.asdatabase
 C:\Users\3349ltk\Documents\GitHub\Statistikkdatabase\obj\Development\Statistikkdatabase.deploymentoptions
 C:\Users\3349ltk\Documents\GitHub\Statistikkdatabase\obj\Development\Statistikkdatabase.deploymenttargets
+C:\Users\8001mfj\Documents\GitHub\Statistikkdatabase\bin\Statistikkdatabase.asdatabase
+C:\Users\8001mfj\Documents\GitHub\Statistikkdatabase\bin\Statistikkdatabase.deploymenttargets
+C:\Users\8001mfj\Documents\GitHub\Statistikkdatabase\bin\Statistikkdatabase.deploymentoptions
+C:\Users\8001mfj\Documents\GitHub\Statistikkdatabase\obj\Development\Statistikkdatabase.asdatabase
+C:\Users\8001mfj\Documents\GitHub\Statistikkdatabase\obj\Development\Statistikkdatabase.deploymentoptions
+C:\Users\8001mfj\Documents\GitHub\Statistikkdatabase\obj\Development\Statistikkdatabase.deploymenttargets
