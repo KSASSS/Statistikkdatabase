@@ -4499,6 +4499,13 @@
               ""
             ],
             "displayFolder": "SosialeTjenester"
+          },
+          {
+            "name": "Antall innbyggere 18-66 år",
+            "expression": [
+              "",
+              "\tCALCULATE(SUM('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Personer (antall) 18-66 år\")"
+            ]
           }
         ]
       },
