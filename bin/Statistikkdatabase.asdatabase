@@ -4429,10 +4429,11 @@
               "return bla",
               "",
               ""
-            ]
+            ],
+            "displayFolder": "Barnehager"
           },
           {
-            "name": "Antall sosialhjelpsmottakere som forsørger barn under 18 år (prosent)",
+            "name": "Antall sosialhjelpsmottakere som forsørger barn under 18 år",
             "expression": [
               "",
               "",
@@ -4442,10 +4443,11 @@
               ") ",
               "  ",
               "return (langtid)"
-            ]
+            ],
+            "displayFolder": "SosialeTjenester"
           },
           {
-            "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år (prosent)",
+            "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år",
             "expression": [
               "",
               "",
@@ -4455,7 +4457,8 @@
               ")",
               "",
               "return sosmott"
-            ]
+            ],
+            "displayFolder": "SosialeTjenester"
           },
           {
             "name": "Sosialhjelpsmottakere med sosialhjelp som viktigste kilde til livsopphold (antall)",
@@ -4468,7 +4471,8 @@
               "",
               "return sosv",
               ""
-            ]
+            ],
+            "displayFolder": "SosialeTjenester"
           },
           {
             "name": "Gjennomsnittlig stønadslengde med sosialhjelp som hovedinntekt (måneder)",
@@ -4483,7 +4487,8 @@
               "",
               "",
               ""
-            ]
+            ],
+            "displayFolder": "SosialeTjenester"
           }
         ]
       },
