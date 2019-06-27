@@ -4444,7 +4444,7 @@
               "  ",
               "return (langtid)"
             ],
-            "displayFolder": "SosialeTjenester"
+            "displayFolder": "Sosiale tjenester"
           },
           {
             "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år",
@@ -4458,7 +4458,7 @@
               "",
               "return sosmott"
             ],
-            "displayFolder": "SosialeTjenester"
+            "displayFolder": "Sosiale tjenester"
           },
           {
             "name": "Sosialhjelpsmottakere med sosialhjelp som viktigste kilde til livsopphold (antall)",
@@ -4472,7 +4472,7 @@
               "return sosv",
               ""
             ],
-            "displayFolder": "SosialeTjenester"
+            "displayFolder": "Sosiale tjenester"
           },
           {
             "name": "Gjennomsnittlig stønadslengde med sosialhjelp som hovedinntekt (måneder)",
@@ -4488,7 +4488,26 @@
               "",
               ""
             ],
+            "displayFolder": "Sosiale tjenester"
+          },
+          {
+            "name": "Antall innbyggere 18-66",
+            "expression": [
+              "",
+              "\tCALCULATE(SUM('Alle Data'[Verdi]),",
+              "\t    FILTER(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Personer (antall) 18-66 år\")",
+              ")",
+              ""
+            ],
             "displayFolder": "SosialeTjenester"
+          },
+          {
+            "name": "Antall innbyggere 18-66 år",
+            "expression": [
+              "",
+              "\tCALCULATE(SUM('Alle Data'[Verdi]),Variabel[Variabelnavn]=\"Personer (antall) 18-66 år\")"
+            ],
+            "displayFolder": "Sosiale tjenester"
           }
         ]
       },
