@@ -1542,37 +1542,33 @@
             "displayFolder": "Eiendomsforvaltning"
           },
           {
-            "name": "Grunnbemanning per barn kommunale barnehager (prosent)*",
+            "name": "Antall barn per ansatt kommunale barnehager*",
             "expression": [
               "",
               "",
-              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"BPA\"),",
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn per ansatt i barnehagen (bemanningstetthet) Kommunal\")",
-              ")",
-              "",
-              "return (divide(1,a)*100)"
+              ")"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Grunnbemanning per barn private barnehager (prosent)*",
+            "name": "Antall barn per ansatt private barnehager*",
             "expression": [
               "",
               "",
-              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"BPA\"),",
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn per ansatt i barnehagen (bemanningstetthet) Privat\")",
-              ")",
-              "",
-              "return (divide(1,a)*100)"
+              ")"
             ],
             "formatString": "0.0",
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Antall barnehagelærere per barn kommunale barnehager",
+            "name": "Antall barn per barnehagelærer kommunale barnehager",
             "expression": [
               "",
               "",
@@ -1597,7 +1593,7 @@
               "\"Barn i barnehage (antall) 3-5 år Kommune Alle oppholdskategorier\"})",
               ")",
               "",
-              "return (divide(bhg,((barn1*2)+(barn2*1))))",
+              "return (divide(((barn1*2)+(barn2*1)), bhg))",
               "",
               "",
               "/*Barn er korrigert ut fra endret vekt - dette er ikke korrigert hos SSB*/",
