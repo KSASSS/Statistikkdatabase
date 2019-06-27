@@ -4398,12 +4398,93 @@
               "var b = CALCULATE(sum('Alle Data'[Verdi]),",
               "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage 1-5 år\")",
               ")",
-              "return b",
+              "",
+              "",
+              "var a = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Barn i barnehage (antall) 0 år Alle eierforhold Alle oppholdskategorier\")",
+              ") ",
+              "",
+              "",
+              "return b + a ",
+              "",
               "",
               ""
             ],
             "formatString": "0",
             "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Barnehagelærere i forhold til grunnbemanning (prosent)",
+            "expression": [
+              " ",
+              "",
+              "var bla = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Andel barnehagelærere i forhold til grunnbemanning (prosent)\")",
+              ")",
+              "",
+              "return bla",
+              "",
+              ""
+            ],
+            "displayFolder": "Barnehager"
+          },
+          {
+            "name": "Antall sosialhjelpsmottakere som forsørger barn under 18 år (prosent)",
+            "expression": [
+              "",
+              "",
+              "var langtid= CALCULATE(sum('Alle Data'[Verdi]), ",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell]=\"12219\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Sosialhjelpsmottakere som forsørger barn under 18 år (antall)\") ",
+              ") ",
+              "  ",
+              "return (langtid)"
+            ],
+            "displayFolder": "SosialeTjenester"
+          },
+          {
+            "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år (prosent)",
+            "expression": [
+              "",
+              "",
+              "var sosmott = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12219\"),",
+              "filter(all('Variabel'[Variabelnavn]), Variabel[Variabelnavn] = \"Sosialhjelpsmottakere (antall)\")",
+              ")",
+              "",
+              "return sosmott"
+            ],
+            "displayFolder": "SosialeTjenester"
+          },
+          {
+            "name": "Sosialhjelpsmottakere med sosialhjelp som viktigste kilde til livsopphold (antall)",
+            "expression": [
+              "",
+              "",
+              "var sosv = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Sosialhjelpsmottakere med sosialhjelp som viktigste kilde til livsopphold (antall)\")",
+              ")",
+              "",
+              "return sosv",
+              ""
+            ],
+            "displayFolder": "SosialeTjenester"
+          },
+          {
+            "name": "Gjennomsnittlig stønadslengde med sosialhjelp som hovedinntekt (måneder)",
+            "expression": [
+              "",
+              "",
+              "var soslg = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn] = \"Gjennomsnittlig stønadslengde for mottakere med sosialhjelp som hovedinntekt  (måneder)\")",
+              ")",
+              "",
+              "return soslg",
+              "",
+              "",
+              ""
+            ],
+            "displayFolder": "SosialeTjenester"
           }
         ]
       },
