@@ -4523,6 +4523,23 @@
               "return ndrsos"
             ],
             "displayFolder": "Sosiale tjenester"
+          },
+          {
+            "name": "Brutto driftsutgifter til sosialtjenesten (f242/f243/f273/f276/f281) (kroner)",
+            "expression": [
+              "",
+              "",
+              "var bdrsos = CALCULATE(sum('Alle Data'[Verdi]),",
+              "filter(all('Alle Data'[Tabell]), 'Alle Data'[Tabell] = \"12367\"),",
+              "filter(ALL('Artsgruppe Kostra'[Artsgruppekode]), 'Artsgruppe Kostra'[Artsgruppekode] = \"AGD10\"),",
+              "filter(all('Funksjon Kostra'[Funksjonskode]), 'Funksjon Kostra'[Funksjonskode] in {\"242\", \"243\", \"273\", \"276\", \"281\"}),",
+              "filter(all('Variabel'[Variabelnavn]), 'Variabel'[Variabelnavn]=\"Beløp (1000 kr)\")",
+              ")",
+              "",
+              "return bdrsos",
+              ""
+            ],
+            "displayFolder": "Sosiale tjenester"
           }
         ]
       },
