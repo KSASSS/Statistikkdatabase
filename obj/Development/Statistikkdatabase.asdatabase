@@ -21,7 +21,7 @@
           "AuthenticationKind": "Windows",
           "kind": "SQL",
           "path": "ks-sql2018;Reporting",
-          "Username": "Axel.Hjelmervik.Hansen@ks.no",
+          "Username": "martin.fjordholm@ks.no",
           "EncryptConnection": false
         }
       }
@@ -4429,7 +4429,7 @@
             "displayFolder": "Barnehager"
           },
           {
-            "name": "Antall sosialhjelpsmottakere som forsørger barn under 18 år (prosent)",
+            "name": "Antall sosialhjelpsmottakere som forsørger barn under 18 år",
             "expression": [
               "",
               "",
@@ -4443,7 +4443,7 @@
             "displayFolder": "SosialeTjenester"
           },
           {
-            "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år (prosent)",
+            "name": "Antall sosialhjelpsmottakere av innbyggere 18-66 år",
             "expression": [
               "",
               "",
